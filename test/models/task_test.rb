@@ -112,62 +112,36 @@ class TaskTest < ActiveSupport::TestCase
     assert_equal now.to_i, task.finished_at.to_i
   end
 
-  test "should handle time_started timestamp" do
+  test "should handle started_at timestamp" do
     task = Task.new(name: "Test Task", task_list: task_lists(:one))
 
-    assert_nil task.time_started
+    assert_nil task.started_at
 
     start_time = Time.current
-    task.time_started = start_time
-    assert_equal start_time.to_i, task.time_started.to_i
+    task.started_at = start_time
+    assert_equal start_time.to_i, task.started_at.to_i
   end
 
-  test "should handle time_finished timestamp" do
-    task = Task.new(name: "Test Task", task_list: task_lists(:one))
-
-    assert_nil task.time_finished
-
-    finish_time = Time.current
-    task.time_finished = finish_time
-    assert_equal finish_time.to_i, task.time_finished.to_i
-  end
-
-  test "should persist time_started and time_finished correctly" do
+  test "should persist started_at correctly" do
     start_time = 1.hour.ago
-    finish_time = Time.current
 
     task = Task.create!(
-      name: "Timed Task",
+      name: "Started Task",
       task_list: task_lists(:one),
-      time_started: start_time,
-      time_finished: finish_time
+      started_at: start_time
     )
 
     task.reload
 
-    assert_equal start_time.to_i, task.time_started.to_i
-    assert_equal finish_time.to_i, task.time_finished.to_i
+    assert_equal start_time.to_i, task.started_at.to_i
   end
 
-  test "should allow time_started without time_finished" do
+  test "should allow task without started_at" do
     task = Task.create!(
-      name: "Started Task",
-      task_list: task_lists(:one),
-      time_started: Time.current
+      name: "Not Started Task",
+      task_list: task_lists(:one)
     )
 
-    assert_not_nil task.time_started
-    assert_nil task.time_finished
-  end
-
-  test "should allow time_finished without time_started" do
-    task = Task.create!(
-      name: "Finished Task",
-      task_list: task_lists(:one),
-      time_finished: Time.current
-    )
-
-    assert_nil task.time_started
-    assert_not_nil task.time_finished
+    assert_nil task.started_at
   end
 end
