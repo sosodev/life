@@ -7,7 +7,6 @@ class Task < ApplicationRecord
   validate :cannot_be_its_own_parent
 
   serialize :estimate, coder: DurationCoder
-  serialize :time_taken, coder: DurationCoder
   serialize :recur_after, coder: DurationCoder
 
   private
