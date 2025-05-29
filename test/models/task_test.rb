@@ -7,6 +7,11 @@ class TaskTest < ActiveSupport::TestCase
     assert_respond_to task, :task_list=
   end
 
+  test "should be invalid without a name" do
+    task = Task.new
+    assert task.invalid?
+  end
+
   test "should belong to parent task optionally" do
     task = Task.new
     assert_respond_to task, :parent

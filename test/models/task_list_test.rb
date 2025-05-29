@@ -30,7 +30,7 @@ class TaskListTest < ActiveSupport::TestCase
 
   test "should be invalid without a name" do
     task_list = TaskList.new
-    assert_equal task_list.valid?, false
+    assert task_list.invalid?
   end
 
   test "should persist name correctly" do
