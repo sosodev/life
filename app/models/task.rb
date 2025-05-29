@@ -13,7 +13,7 @@ class Task < ApplicationRecord
   private
 
   def cannot_be_its_own_parent
-    if parent_id == id
+    if id? and parent_id == id
       errors.add(:parent, "cannot be itself")
     end
   end
