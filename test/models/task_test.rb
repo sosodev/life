@@ -12,6 +12,12 @@ class TaskTest < ActiveSupport::TestCase
     assert task.invalid?
   end
 
+  test "cannot be its own parent" do
+    task = Task.create!(name: "parent test", task_list: task_lists(:one))
+    task.parent_id = task.id
+    assert task.invalid?
+  end
+
   test "should belong to parent task optionally" do
     task = Task.new
     assert_respond_to task, :parent
