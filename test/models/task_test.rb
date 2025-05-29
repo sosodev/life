@@ -1,7 +1,5 @@
 require "test_helper"
 
 class TaskTest < ActiveSupport::TestCase
-  # test "the truth" do
-  #   assert true
-  # end
+  # write some tests for the task model AI!
 end
