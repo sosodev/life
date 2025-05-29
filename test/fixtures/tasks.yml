@@ -2,16 +2,8 @@
 
 one:
   name: TaskOne
-  description: MyText
-  recur_after: 1
-  estimate: 1
-  time_taken: 1
   task_list: one
 
 two:
   name: TaskTwo
-  description: MyText
-  recur_after: 1
-  estimate: 1
-  time_taken: 1
   task_list: two

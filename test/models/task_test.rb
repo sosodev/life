@@ -66,18 +66,6 @@ class TaskTest < ActiveSupport::TestCase
     assert_equal 1.hour, task.estimate
   end
 
-  test "should serialize time_taken as duration" do
-    task = Task.new
-
-    # Test setting with ActiveSupport::Duration
-    task.time_taken = 90.minutes
-    assert_equal 90.minutes, task.time_taken
-
-    # Test setting with numeric value (seconds)
-    task.time_taken = 1800
-    assert_equal 30.minutes, task.time_taken
-  end
-
   test "should serialize recur_after as duration" do
     task = Task.new
 
@@ -96,9 +84,6 @@ class TaskTest < ActiveSupport::TestCase
     task.estimate = nil
     assert_nil task.estimate
 
-    task.time_taken = nil
-    assert_nil task.time_taken
-
     task.recur_after = nil
     assert_nil task.recur_after
   end
@@ -108,14 +93,12 @@ class TaskTest < ActiveSupport::TestCase
       name: "Test Task",
       task_list: task_lists(:one),
       estimate: 2.hours,
-      time_taken: 90.minutes,
       recur_after: 1.week
     )
 
     task.reload
 
     assert_equal 2.hours, task.estimate
-    assert_equal 90.minutes, task.time_taken
     assert_equal 1.week, task.recur_after
   end
 
