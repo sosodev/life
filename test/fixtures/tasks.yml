@@ -3,15 +3,15 @@
 one:
   title: MyString
   description: MyText
-  parent: one
   recur_after: 1
   estimate: 1
   time_taken: 1
+  task_list: one
 
 two:
   title: MyString
   description: MyText
-  parent: two
   recur_after: 1
   estimate: 1
   time_taken: 1
+  task_list: two
