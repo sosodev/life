@@ -10,11 +10,12 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.0].define(version: 2025_05_29_071732) do
+ActiveRecord::Schema[8.0].define(version: 2025_05_29_080000) do
   create_table "task_lists", force: :cascade do |t|
-    t.string "name"
+    t.string "name", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.index ["name"], name: "index_task_lists_on_name", unique: true
   end
 
   create_table "tasks", force: :cascade do |t|
