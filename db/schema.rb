@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.0].define(version: 2025_05_29_100000) do
+ActiveRecord::Schema[8.0].define(version: 2025_05_29_110000) do
   create_table "task_lists", force: :cascade do |t|
     t.string "name", null: false
     t.datetime "created_at", null: false
@@ -28,8 +28,7 @@ ActiveRecord::Schema[8.0].define(version: 2025_05_29_100000) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.integer "task_list_id", null: false
-    t.datetime "time_started"
-    t.datetime "time_finished"
+    t.datetime "started_at"
     t.index ["parent_id"], name: "index_tasks_on_parent_id"
     t.index ["task_list_id"], name: "index_tasks_on_task_list_id"
   end
