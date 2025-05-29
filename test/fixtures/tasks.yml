@@ -1,7 +1,7 @@
 # Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
 
 one:
-  title: MyString
+  name: TaskOne
   description: MyText
   recur_after: 1
   estimate: 1
@@ -9,7 +9,7 @@ one:
   task_list: one
 
 two:
-  title: MyString
+  name: TaskTwo
   description: MyText
   recur_after: 1
   estimate: 1
