@@ -13,7 +13,7 @@ class TaskTest < ActiveSupport::TestCase
     assert_respond_to task, :parent=
 
     # Should be valid without a parent
-    task = Task.new(title: "Test Task", task_list: task_lists(:one))
+    task = Task.new(name: "Test Task", task_list: task_lists(:one))
     assert task.valid?
   end
 
@@ -22,7 +22,7 @@ class TaskTest < ActiveSupport::TestCase
     assert_respond_to parent_task, :children
 
     child_task = Task.create!(
-      title: "Child Task",
+      name: "Child Task",
       task_list: parent_task.task_list,
       parent: parent_task
     )
@@ -33,7 +33,7 @@ class TaskTest < ActiveSupport::TestCase
   test "should destroy children when parent is destroyed" do
     parent_task = tasks(:one)
     child_task = Task.create!(
-      title: "Child Task",
+      name: "Child Task",
       task_list: parent_task.task_list,
       parent: parent_task
     )
@@ -94,7 +94,7 @@ class TaskTest < ActiveSupport::TestCase
 
   test "should persist duration fields correctly" do
     task = Task.create!(
-      title: "Test Task",
+      name: "Test Task",
       task_list: task_lists(:one),
       estimate: 2.hours,
       time_taken: 90.minutes,
@@ -109,7 +109,7 @@ class TaskTest < ActiveSupport::TestCase
   end
 
   test "should handle finished_at timestamp" do
-    task = Task.new(title: "Test Task", task_list: task_lists(:one))
+    task = Task.new(name: "Test Task", task_list: task_lists(:one))
 
     assert_nil task.finished_at
 
