@@ -11,8 +11,8 @@ class TaskListTest < ActiveSupport::TestCase
     task_list = TaskList.create!(name: "Test List")
 
     # Create some tasks for this list
-    task1 = Task.create!(title: "Task 1", task_list: task_list)
-    task2 = Task.create!(title: "Task 2", task_list: task_list)
+    task1 = Task.create!(name: "Task 1", task_list: task_list)
+    task2 = Task.create!(name: "Task 2", task_list: task_list)
 
     # Verify tasks exist
     assert_equal 2, task_list.tasks.count
@@ -50,7 +50,7 @@ class TaskListTest < ActiveSupport::TestCase
   test "should maintain association when tasks are added" do
     task_list = TaskList.create!(name: "Test List")
 
-    task = Task.create!(title: "New Task", task_list: task_list)
+    task = Task.create!(name: "New Task", task_list: task_list)
 
     assert_includes task_list.tasks, task
     assert_equal task_list, task.task_list
