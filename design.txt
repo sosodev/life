@@ -1,0 +1,211 @@
+DESIGN SYSTEM DOCUMENTATION
+
+OVERVIEW
+--------
+This design system creates a modern, clean interface using TailwindCSS with support for both light and dark modes. The design emphasizes card-based layouts, subtle drop shadows for depth, and bold purple accents for visual interest.
+
+COLOR PALETTE
+-------------
+Primary Colors:
+- Purple Accent: purple-600 (light mode) / purple-500 (dark mode)
+- Purple Hover: purple-700 (light mode) / purple-400 (dark mode)
+- Purple Light: purple-50 (light mode) / purple-950 (dark mode)
+
+Neutral Colors:
+- Background: white (light mode) / gray-900 (dark mode)
+- Surface: gray-50 (light mode) / gray-800 (dark mode)
+- Text Primary: gray-900 (light mode) / gray-100 (dark mode)
+- Text Secondary: gray-600 (light mode) / gray-400 (dark mode)
+- Border: gray-200 (light mode) / gray-700 (dark mode)
+
+TYPOGRAPHY
+----------
+Headings:
+<h1 class="text-4xl font-bold text-gray-900 dark:text-gray-100">Main Heading</h1>
+<h2 class="text-3xl font-semibold text-gray-900 dark:text-gray-100">Section Heading</h2>
+<h3 class="text-2xl font-semibold text-gray-900 dark:text-gray-100">Subsection</h3>
+<h4 class="text-xl font-medium text-gray-900 dark:text-gray-100">Card Title</h4>
+
+Body Text:
+<p class="text-base text-gray-600 dark:text-gray-400">Regular body text</p>
+<p class="text-sm text-gray-500 dark:text-gray-500">Secondary text</p>
+
+COMPONENTS
+----------
+
+Base Card:
+<div class="bg-white dark:bg-gray-800 rounded-lg shadow-md hover:shadow-lg transition-shadow duration-200 p-6 border border-gray-200 dark:border-gray-700">
+  <!-- Card content -->
+</div>
+
+Elevated Card (with stronger shadow):
+<div class="bg-white dark:bg-gray-800 rounded-xl shadow-lg hover:shadow-xl transition-all duration-300 p-8 border border-gray-100 dark:border-gray-700">
+  <!-- Card content -->
+</div>
+
+Interactive Card:
+<div class="bg-white dark:bg-gray-800 rounded-lg shadow-md hover:shadow-xl hover:scale-[1.02] transition-all duration-300 p-6 border border-gray-200 dark:border-gray-700 cursor-pointer">
+  <!-- Card content -->
+</div>
+
+Primary Button:
+<button class="bg-purple-600 hover:bg-purple-700 dark:bg-purple-500 dark:hover:bg-purple-400 text-white font-semibold py-2 px-6 rounded-lg shadow-md hover:shadow-lg transition-all duration-200">
+  Click Me
+</button>
+
+Secondary Button:
+<button class="bg-gray-200 hover:bg-gray-300 dark:bg-gray-700 dark:hover:bg-gray-600 text-gray-900 dark:text-gray-100 font-medium py-2 px-6 rounded-lg transition-colors duration-200">
+  Secondary Action
+</button>
+
+Ghost Button:
+<button class="text-purple-600 hover:text-purple-700 dark:text-purple-400 dark:hover:text-purple-300 font-medium py-2 px-4 rounded-lg hover:bg-purple-50 dark:hover:bg-purple-950 transition-colors duration-200">
+  Ghost Action
+</button>
+
+Form Input:
+<input type="text" class="w-full px-4 py-2 rounded-lg border border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-800 text-gray-900 dark:text-gray-100 focus:ring-2 focus:ring-purple-500 focus:border-transparent transition-colors duration-200" placeholder="Enter text...">
+
+Badge:
+<span class="inline-flex items-center px-3 py-1 rounded-full text-sm font-medium bg-purple-100 text-purple-800 dark:bg-purple-900 dark:text-purple-200">
+  New
+</span>
+
+LAYOUT PATTERNS
+---------------
+
+Page Container:
+<div class="min-h-screen bg-gray-50 dark:bg-gray-900 transition-colors duration-200">
+  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+    <!-- Page content -->
+  </div>
+</div>
+
+Card Grid:
+<div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+  <!-- Card components -->
+</div>
+
+Sidebar Layout:
+<div class="flex flex-col lg:flex-row gap-6">
+  <aside class="lg:w-64 space-y-4">
+    <!-- Sidebar cards -->
+  </aside>
+  <main class="flex-1 space-y-6">
+    <!-- Main content cards -->
+  </main>
+</div>
+
+SPECIAL EFFECTS
+---------------
+
+Gradient Accent:
+<div class="bg-gradient-to-r from-purple-600 to-purple-700 dark:from-purple-500 dark:to-purple-600 text-white p-6 rounded-lg shadow-lg">
+  <!-- Content -->
+</div>
+
+Hover Glow Effect:
+<div class="relative group">
+  <div class="absolute -inset-0.5 bg-gradient-to-r from-purple-600 to-pink-600 rounded-lg blur opacity-0 group-hover:opacity-75 transition duration-300"></div>
+  <div class="relative bg-white dark:bg-gray-800 rounded-lg p-6">
+    <!-- Content -->
+  </div>
+</div>
+
+Loading Skeleton:
+<div class="animate-pulse">
+  <div class="h-4 bg-gray-200 dark:bg-gray-700 rounded w-3/4 mb-4"></div>
+  <div class="h-4 bg-gray-200 dark:bg-gray-700 rounded w-1/2"></div>
+</div>
+
+NAVIGATION
+----------
+
+Navigation Bar:
+<nav class="bg-white dark:bg-gray-800 shadow-md border-b border-gray-200 dark:border-gray-700">
+  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    <div class="flex justify-between h-16 items-center">
+      <div class="flex items-center space-x-8">
+        <!-- Logo and nav items -->
+      </div>
+    </div>
+  </div>
+</nav>
+
+Tab Navigation:
+<div class="border-b border-gray-200 dark:border-gray-700">
+  <nav class="-mb-px flex space-x-8">
+    <a href="#" class="border-b-2 border-purple-600 dark:border-purple-500 text-purple-600 dark:text-purple-400 py-2 px-1 text-sm font-medium">
+      Active Tab
+    </a>
+    <a href="#" class="border-b-2 border-transparent text-gray-500 hover:text-gray-700 dark:text-gray-400 dark:hover:text-gray-300 hover:border-gray-300 dark:hover:border-gray-600 py-2 px-1 text-sm font-medium transition-colors duration-200">
+      Inactive Tab
+    </a>
+  </nav>
+</div>
+
+UTILITY CLASSES
+---------------
+
+Spacing:
+- Use consistent spacing: space-y-4 for vertical spacing between cards
+- Padding: p-4 (small), p-6 (medium), p-8 (large)
+- Margin: mt-4, mb-6 for section spacing
+
+Transitions:
+- Always include smooth transitions: transition-all duration-200
+- For hover effects: transition-shadow duration-200
+- For color changes: transition-colors duration-200
+
+Responsive Design:
+- Mobile-first approach
+- Breakpoints: sm:, md:, lg:, xl:
+- Example: grid-cols-1 md:grid-cols-2 lg:grid-cols-3
+
+DARK MODE IMPLEMENTATION
+------------------------
+
+Enable dark mode by adding the 'dark' class to the <html> element:
+
+// Toggle dark mode
+document.documentElement.classList.toggle('dark');
+
+// System preference detection
+if (window.matchMedia('(prefers-color-scheme: dark)').matches) {
+  document.documentElement.classList.add('dark');
+}
+
+BEST PRACTICES
+--------------
+
+1. Consistency: Always use the defined color palette and spacing system
+2. Accessibility: Ensure sufficient color contrast in both light and dark modes
+3. Performance: Use Tailwind's purge feature to remove unused styles
+4. Responsiveness: Test all components on mobile, tablet, and desktop
+5. Interactivity: Add hover states and transitions to all interactive elements
+6. Shadow Hierarchy: Use shadow-sm < shadow-md < shadow-lg < shadow-xl to create depth
+
+EXAMPLE PAGE STRUCTURE
+----------------------
+
+<!DOCTYPE html>
+<html lang="en" class="dark">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Modern App</title>
+</head>
+<body class="bg-gray-50 dark:bg-gray-900 text-gray-900 dark:text-gray-100 transition-colors duration-200">
+  <!-- Navigation -->
+  <nav class="bg-white dark:bg-gray-800 shadow-md">
+    <!-- Nav content -->
+  </nav>
+  
+  <!-- Main Content -->
+  <main class="max-w-7xl mx-auto px-4 py-8">
+    <div class="grid grid-cols-1 lg:grid-cols-3 gap-6">
+      <!-- Cards -->
+    </div>
+  </main>
+</body>
+</html>
