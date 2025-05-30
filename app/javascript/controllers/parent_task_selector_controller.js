@@ -15,10 +15,13 @@ export default class extends Controller {
       return
     }
 
+    // Store the currently selected parent task ID
+    const currentParentId = this.parentTaskTarget.value
+
     fetch(`/tasks/parent_tasks?task_list_id=${taskListId}`)
       .then(response => response.json())
       .then(data => {
-        this.populateParentTasks(data)
+        this.populateParentTasks(data, currentParentId)
       })
       .catch(error => {
         console.error('Error fetching parent tasks:', error)
@@ -26,7 +29,7 @@ export default class extends Controller {
       })
   }
 
-  populateParentTasks(tasks) {
+  populateParentTasks(tasks, selectedParentId = null) {
     // Clear existing options except the prompt
     this.parentTaskTarget.innerHTML = '<option value="">No parent task</option>'
     
@@ -35,6 +38,12 @@ export default class extends Controller {
       const option = document.createElement('option')
       option.value = task.id
       option.textContent = task.name
+      
+      // Restore the previously selected parent task if it exists in the new list
+      if (selectedParentId && task.id.toString() === selectedParentId) {
+        option.selected = true
+      }
+      
       this.parentTaskTarget.appendChild(option)
     })
   }
