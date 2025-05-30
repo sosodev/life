@@ -1,4 +1,6 @@
 class TasksController < ApplicationController
+  before_action :set_task, only: [:show, :edit, :update, :destroy]
+
   def index
     @task_lists = TaskList.all
     @tasks = filter_tasks
@@ -25,6 +27,26 @@ class TasksController < ApplicationController
     end
   end
 
+  def edit
+    @task_lists = TaskList.all
+    @parent_tasks = @task.task_list_id ? Task.where(task_list_id: @task.task_list_id) : []
+  end
+
+  def update
+    if @task.update(task_params)
+      redirect_to tasks_path, notice: "Task was successfully updated."
+    else
+      @task_lists = TaskList.all
+      @parent_tasks = @task.task_list_id ? Task.where(task_list_id: @task.task_list_id) : []
+      render :edit, status: :unprocessable_entity
+    end
+  end
+
+  def destroy
+    @task.destroy
+    redirect_to tasks_path, notice: "Task was successfully deleted."
+  end
+
   def parent_tasks
     task_list_id = params[:task_list_id]
     
@@ -36,19 +58,14 @@ class TasksController < ApplicationController
     end
   end
 
-  def edit
-  end
-
-  def update
-  end
-
-  def destroy
-  end
-
   private
 
+  def set_task
+    @task = Task.find(params[:id])
+  end
+
   def task_params
-    params.require(:task).permit(:name, :description, :task_list_id, :parent_id, :urgent, :important, :due_date, :estimate, :recur_after)
+    params.require(:task).permit(:name, :description, :task_list_id, :parent_id, :urgent, :important, :due_date, :scheduled_at, :estimate, :recur_after)
   end
 
   def filter_tasks
