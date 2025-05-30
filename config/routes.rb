@@ -18,6 +18,5 @@ Rails.application.routes.draw do
     end
   end
   resources :task_lists
-
-  get "/calendar", to: "calendar#index"
+  resources :calendar, only: [:index]
 end
