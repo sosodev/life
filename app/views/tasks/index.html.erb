@@ -4,49 +4,49 @@
     <div class="w-1/4 bg-white dark:bg-gray-800 p-6 border-r border-gray-200 dark:border-gray-700 shadow-md">
       <h2 class="text-2xl font-semibold text-gray-900 dark:text-gray-100 mb-6">Filters</h2>
       
-      <%= form_with url: tasks_path, method: :get, local: true, class: "space-y-6" do |form| %>
-        <!-- Task List Filter -->
-        <div>
-          <label class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">Task List</label>
-          <%= form.select :task_list_id, 
-              options_from_collection_for_select(@task_lists, :id, :name, params[:task_list_id]),
-              { prompt: "All Lists" },
-              { class: "w-full px-4 py-2 rounded-lg border border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-800 text-gray-900 dark:text-gray-100 focus:ring-2 focus:ring-purple-500 focus:border-transparent transition-colors duration-200" } %>
-        </div>
-        
-        <!-- Urgent Filter -->
-        <div>
-          <label class="flex items-center">
-            <%= form.check_box :urgent, { checked: params[:urgent] == 'true', class: "h-4 w-4 text-purple-600 focus:ring-purple-500 border-gray-300 dark:border-gray-600 rounded" }, "true", "" %>
-            <span class="ml-2 text-sm text-gray-700 dark:text-gray-300">Urgent only</span>
-          </label>
-        </div>
-        
-        <!-- Important Filter -->
-        <div>
-          <label class="flex items-center">
-            <%= form.check_box :important, { checked: params[:important] == 'true', class: "h-4 w-4 text-purple-600 focus:ring-purple-500 border-gray-300 dark:border-gray-600 rounded" }, "true", "" %>
-            <span class="ml-2 text-sm text-gray-700 dark:text-gray-300">Important only</span>
-          </label>
-        </div>
-        
-        <!-- Due Date Filter -->
-        <div>
-          <label class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">Due Date</label>
-          <%= form.select :due_date,
-              options_for_select([
-                ['All', ''],
-                ['Overdue', 'overdue'],
-                ['Due Today', 'today'],
-                ['Due This Week', 'this_week'],
-                ['No Due Date', 'no_due_date']
-              ], params[:due_date]),
-              {},
-              { class: "w-full px-4 py-2 rounded-lg border border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-800 text-gray-900 dark:text-gray-100 focus:ring-2 focus:ring-purple-500 focus:border-transparent transition-colors duration-200" } %>
-        </div>
-        
-        <%= form.submit "Apply Filters", class: "w-full bg-purple-600 hover:bg-purple-700 dark:bg-purple-500 dark:hover:bg-purple-400 text-white font-semibold py-2 px-4 rounded-lg shadow-md hover:shadow-lg transition-all duration-200" %>
-      <% end %>
+      <div data-controller="filter-form">
+        <%= form_with url: tasks_path, method: :get, local: true, class: "space-y-6", data: { filter_form_target: "form" } do |form| %>
+          <!-- Task List Filter -->
+          <div>
+            <label class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">Task List</label>
+            <%= form.select :task_list_id, 
+                options_from_collection_for_select(@task_lists, :id, :name, params[:task_list_id]),
+                { prompt: "All Lists" },
+                { class: "w-full px-4 py-2 rounded-lg border border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-800 text-gray-900 dark:text-gray-100 focus:ring-2 focus:ring-purple-500 focus:border-transparent transition-colors duration-200", data: { action: "change->filter-form#change" } } %>
+          </div>
+          
+          <!-- Urgent Filter -->
+          <div>
+            <label class="flex items-center">
+              <%= form.check_box :urgent, { checked: params[:urgent] == 'true', class: "h-4 w-4 text-purple-600 focus:ring-purple-500 border-gray-300 dark:border-gray-600 rounded", data: { action: "change->filter-form#change" } }, "true", "" %>
+              <span class="ml-2 text-sm text-gray-700 dark:text-gray-300">Urgent only</span>
+            </label>
+          </div>
+          
+          <!-- Important Filter -->
+          <div>
+            <label class="flex items-center">
+              <%= form.check_box :important, { checked: params[:important] == 'true', class: "h-4 w-4 text-purple-600 focus:ring-purple-500 border-gray-300 dark:border-gray-600 rounded", data: { action: "change->filter-form#change" } }, "true", "" %>
+              <span class="ml-2 text-sm text-gray-700 dark:text-gray-300">Important only</span>
+            </label>
+          </div>
+          
+          <!-- Due Date Filter -->
+          <div>
+            <label class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">Due Date</label>
+            <%= form.select :due_date,
+                options_for_select([
+                  ['All', ''],
+                  ['Overdue', 'overdue'],
+                  ['Due Today', 'today'],
+                  ['Due This Week', 'this_week'],
+                  ['No Due Date', 'no_due_date']
+                ], params[:due_date]),
+                {},
+                { class: "w-full px-4 py-2 rounded-lg border border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-800 text-gray-900 dark:text-gray-100 focus:ring-2 focus:ring-purple-500 focus:border-transparent transition-colors duration-200", data: { action: "change->filter-form#change" } } %>
+          </div>
+        <% end %>
+      </div>
       
       <!-- New Task Button -->
       <div class="mt-8">
