@@ -8,9 +8,21 @@ class TasksController < ApplicationController
   end
 
   def new
+    @task = Task.new
+    @task_lists = TaskList.all
+    @parent_tasks = Task.where(parent_id: nil)
   end
 
   def create
+    @task = Task.new(task_params)
+    
+    if @task.save
+      redirect_to tasks_path, notice: 'Task was successfully created.'
+    else
+      @task_lists = TaskList.all
+      @parent_tasks = Task.where(parent_id: nil)
+      render :new, status: :unprocessable_entity
+    end
   end
 
   def edit
@@ -23,6 +35,10 @@ class TasksController < ApplicationController
   end
 
   private
+
+  def task_params
+    params.require(:task).permit(:name, :description, :task_list_id, :parent_id, :urgent, :important, :due_date, :estimate, :recur_after)
+  end
 
   def filter_tasks
     tasks = Task.includes(:task_list, :parent)
