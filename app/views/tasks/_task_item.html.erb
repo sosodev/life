@@ -69,7 +69,7 @@
   <% if task.children.any? %>
     <div data-task-toggle-target="children" style="display: none;" class="bg-gray-50 dark:bg-gray-800 border-t border-gray-200 dark:border-gray-700">
       <% task.children.each do |child_task| %>
-        <div class="ml-8">
+        <div class="ml-2">
           <%= render 'task_item', task: child_task %>
         </div>
       <% end %>
