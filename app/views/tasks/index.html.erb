@@ -2,7 +2,9 @@
   <div class="flex h-screen">
     <!-- Sidebar -->
     <div class="w-1/4 bg-white dark:bg-gray-800 p-6 border-r border-gray-200 dark:border-gray-700 shadow-md">
-      <h2 class="text-2xl font-semibold text-gray-900 dark:text-gray-100 mb-6">Filters</h2>
+      <%= link_to("<- dashboard", dashboard_url, class: "underline text-purple-700 hover:text-purple-900") %>
+
+      <h2 class="text-2xl font-semibold text-gray-900 dark:text-gray-100 mt-4 mb-6">Filters</h2>
       
       <div data-controller="filter-form">
         <%= form_with url: tasks_path, method: :get, local: true, class: "space-y-6", data: { filter_form_target: "form" } do |form| %>
