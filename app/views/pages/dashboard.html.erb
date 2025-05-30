@@ -1,4 +1,137 @@
-<div>
-  <h1 class="font-bold text-4xl">Pages#dashboard</h1>
-  <p>Find me in app/views/pages/dashboard.html.erb</p>
+<div class="min-h-screen bg-gray-50 dark:bg-gray-900 transition-colors duration-200">
+  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+    <div class="mb-8">
+      <h1 class="text-4xl font-bold text-gray-900 dark:text-gray-100">Dashboard</h1>
+      <p class="text-base text-gray-600 dark:text-gray-400 mt-2">Welcome to your productivity hub</p>
+    </div>
+
+    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+      <!-- Tasks Card -->
+      <%= link_to tasks_path, class: "group" do %>
+        <div class="bg-white dark:bg-gray-800 rounded-lg shadow-md hover:shadow-xl hover:scale-[1.02] transition-all duration-300 p-6 border border-gray-200 dark:border-gray-700 cursor-pointer">
+          <div class="flex items-center justify-between mb-4">
+            <div class="p-3 bg-purple-100 dark:bg-purple-900 rounded-lg">
+              <svg class="w-8 h-8 text-purple-600 dark:text-purple-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5H7a2 2 0 00-2 2v10a2 2 0 002 2h8a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2m-6 9l2 2 4-4"></path>
+              </svg>
+            </div>
+            <span class="text-sm text-purple-600 dark:text-purple-400 font-medium group-hover:text-purple-700 dark:group-hover:text-purple-300 transition-colors duration-200">
+              View All →
+            </span>
+          </div>
+          <h3 class="text-xl font-semibold text-gray-900 dark:text-gray-100 mb-2">Tasks</h3>
+          <p class="text-gray-600 dark:text-gray-400 text-sm">
+            Manage your tasks with filtering, hierarchical organization, and priority settings.
+          </p>
+          <div class="mt-4 flex items-center space-x-4">
+            <span class="inline-flex items-center px-3 py-1 rounded-full text-xs font-medium bg-green-100 text-green-800 dark:bg-green-900 dark:text-green-200">
+              📋 Organized
+            </span>
+            <span class="inline-flex items-center px-3 py-1 rounded-full text-xs font-medium bg-blue-100 text-blue-800 dark:bg-blue-900 dark:text-blue-200">
+              🔍 Filterable
+            </span>
+          </div>
+        </div>
+      <% end %>
+
+      <!-- Task Lists Card -->
+      <%= link_to task_lists_path, class: "group" do %>
+        <div class="bg-white dark:bg-gray-800 rounded-lg shadow-md hover:shadow-xl hover:scale-[1.02] transition-all duration-300 p-6 border border-gray-200 dark:border-gray-700 cursor-pointer">
+          <div class="flex items-center justify-between mb-4">
+            <div class="p-3 bg-purple-100 dark:bg-purple-900 rounded-lg">
+              <svg class="w-8 h-8 text-purple-600 dark:text-purple-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 11H5m14 0a2 2 0 012 2v6a2 2 0 01-2 2H5a2 2 0 01-2-2v-6a2 2 0 012-2m14 0V9a2 2 0 00-2-2M5 11V9a2 2 0 012-2m0 0V5a2 2 0 012-2h6a2 2 0 012 2v2M7 7h10"></path>
+              </svg>
+            </div>
+            <span class="text-sm text-purple-600 dark:text-purple-400 font-medium group-hover:text-purple-700 dark:group-hover:text-purple-300 transition-colors duration-200">
+              Manage →
+            </span>
+          </div>
+          <h3 class="text-xl font-semibold text-gray-900 dark:text-gray-100 mb-2">Task Lists</h3>
+          <p class="text-gray-600 dark:text-gray-400 text-sm">
+            Create and organize your task lists to categorize different projects and areas of focus.
+          </p>
+          <div class="mt-4 flex items-center space-x-4">
+            <span class="inline-flex items-center px-3 py-1 rounded-full text-xs font-medium bg-yellow-100 text-yellow-800 dark:bg-yellow-900 dark:text-yellow-200">
+              📁 Categories
+            </span>
+            <span class="inline-flex items-center px-3 py-1 rounded-full text-xs font-medium bg-purple-100 text-purple-800 dark:bg-purple-900 dark:text-purple-200">
+              ⚡ Quick Access
+            </span>
+          </div>
+        </div>
+      <% end %>
+
+      <!-- Placeholder Card for Future Features -->
+      <div class="bg-white dark:bg-gray-800 rounded-lg shadow-md p-6 border border-gray-200 dark:border-gray-700 opacity-60">
+        <div class="flex items-center justify-between mb-4">
+          <div class="p-3 bg-gray-100 dark:bg-gray-700 rounded-lg">
+            <svg class="w-8 h-8 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6v6m0 0v6m0-6h6m-6 0H6"></path>
+            </svg>
+          </div>
+          <span class="text-sm text-gray-400 font-medium">
+            Coming Soon
+          </span>
+        </div>
+        <h3 class="text-xl font-semibold text-gray-500 dark:text-gray-400 mb-2">More Tools</h3>
+        <p class="text-gray-400 text-sm">
+          Additional productivity tools and features will be added here in future updates.
+        </p>
+        <div class="mt-4">
+          <span class="inline-flex items-center px-3 py-1 rounded-full text-xs font-medium bg-gray-100 text-gray-600 dark:bg-gray-700 dark:text-gray-400">
+            🚧 In Development
+          </span>
+        </div>
+      </div>
+    </div>
+
+    <!-- Quick Stats Section -->
+    <div class="mt-12">
+      <h2 class="text-2xl font-semibold text-gray-900 dark:text-gray-100 mb-6">Quick Overview</h2>
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+        <div class="bg-white dark:bg-gray-800 rounded-lg shadow-md p-6 border border-gray-200 dark:border-gray-700">
+          <div class="flex items-center">
+            <div class="p-2 bg-green-100 dark:bg-green-900 rounded-lg">
+              <svg class="w-6 h-6 text-green-600 dark:text-green-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+              </svg>
+            </div>
+            <div class="ml-4">
+              <p class="text-sm font-medium text-gray-600 dark:text-gray-400">Total Tasks</p>
+              <p class="text-2xl font-semibold text-gray-900 dark:text-gray-100"><%= Task.count %></p>
+            </div>
+          </div>
+        </div>
+
+        <div class="bg-white dark:bg-gray-800 rounded-lg shadow-md p-6 border border-gray-200 dark:border-gray-700">
+          <div class="flex items-center">
+            <div class="p-2 bg-blue-100 dark:bg-blue-900 rounded-lg">
+              <svg class="w-6 h-6 text-blue-600 dark:text-blue-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 11H5m14 0a2 2 0 012 2v6a2 2 0 01-2 2H5a2 2 0 01-2-2v-6a2 2 0 012-2m14 0V9a2 2 0 00-2-2M5 11V9a2 2 0 012-2m0 0V5a2 2 0 012-2h6a2 2 0 012 2v2M7 7h10"></path>
+              </svg>
+            </div>
+            <div class="ml-4">
+              <p class="text-sm font-medium text-gray-600 dark:text-gray-400">Task Lists</p>
+              <p class="text-2xl font-semibold text-gray-900 dark:text-gray-100"><%= TaskList.count %></p>
+            </div>
+          </div>
+        </div>
+
+        <div class="bg-white dark:bg-gray-800 rounded-lg shadow-md p-6 border border-gray-200 dark:border-gray-700">
+          <div class="flex items-center">
+            <div class="p-2 bg-red-100 dark:bg-red-900 rounded-lg">
+              <svg class="w-6 h-6 text-red-600 dark:text-red-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+              </svg>
+            </div>
+            <div class="ml-4">
+              <p class="text-sm font-medium text-gray-600 dark:text-gray-400">Urgent Tasks</p>
+              <p class="text-2xl font-semibold text-gray-900 dark:text-gray-100"><%= Task.where(urgent: true).count %></p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
 </div>
