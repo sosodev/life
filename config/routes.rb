@@ -13,4 +13,5 @@ Rails.application.routes.draw do
   root to: "pages#dashboard", as: :dashboard
 
   resources :tasks
+  resources :task_lists
 end
