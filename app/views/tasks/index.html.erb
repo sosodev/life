@@ -58,12 +58,12 @@
     </div>
     
     <!-- Main Content -->
-    <div class="flex-1 p-8 bg-gray-50 dark:bg-gray-900">
+    <div class="flex-1 p-4 bg-gray-50 dark:bg-gray-900 overflow-y-auto">
       <div class="max-w-6xl mx-auto">
-        <h1 class="text-4xl font-bold text-gray-900 dark:text-gray-100 mb-8">Tasks</h1>
+        <h1 class="text-4xl font-bold text-gray-900 dark:text-gray-100 mb-6">Tasks</h1>
         
         <% if @tasks.any? %>
-          <div class="space-y-4">
+          <div class="space-y-2">
             <% @tasks.each do |task| %>
               <%= render 'task_item', task: task %>
             <% end %>
@@ -72,7 +72,7 @@
           <div class="bg-white dark:bg-gray-800 rounded-lg shadow-md p-12 border border-gray-200 dark:border-gray-700 text-center">
             <div class="text-gray-500 dark:text-gray-400">
               <svg class="mx-auto h-12 w-12 mb-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5H7a2 2 0 00-2 2v10a2 2 0 002 2h8a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2" />
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5H7a2 2 0 00-2 2v10a2 2 0 002 2h8a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 0 012 2" />
               </svg>
               <p class="text-lg font-medium">No tasks found matching your filters.</p>
               <p class="text-sm mt-2">Try adjusting your filters or create a new task to get started.</p>

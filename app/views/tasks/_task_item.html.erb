@@ -1,31 +1,31 @@
-<div class="bg-white dark:bg-gray-800 rounded-lg shadow-md hover:shadow-lg transition-all duration-200 p-6 border border-gray-200 dark:border-gray-700" data-controller="task-toggle">
-  <div class="flex items-center justify-between">
-    <div class="flex items-center space-x-4">
+<div class="bg-white dark:bg-gray-800 rounded-lg shadow-sm hover:shadow-md transition-all duration-200 p-3 border border-gray-200 dark:border-gray-700" data-controller="task-toggle">
+  <div class="flex items-start justify-between">
+    <div class="flex items-start space-x-2 flex-1">
       <!-- Expand/Collapse Button for tasks with children -->
-      <% if task.children.any? %>
-        <button data-task-toggle-target="button"
-                data-action="click->task-toggle#toggle"
-                class="text-gray-500 hover:text-purple-600 dark:text-gray-400 dark:hover:text-purple-400 font-mono text-lg transition-colors duration-200 p-1 rounded hover:bg-purple-50 dark:hover:bg-purple-950">
-          ▶
-        </button>
-      <% else %>
-        <span class="w-6"></span>
-      <% end %>
+      <div class="flex-shrink-0 w-6 flex justify-center">
+        <% if task.children.any? %>
+          <button data-task-toggle-target="button"
+                  data-action="click->task-toggle#toggle"
+                  class="text-gray-500 hover:text-purple-600 dark:text-gray-400 dark:hover:text-purple-400 font-mono text-sm transition-colors duration-200 p-1 rounded hover:bg-purple-50 dark:hover:bg-purple-950">
+            ▶
+          </button>
+        <% end %>
+      </div>
       
       <!-- Task Name and Details -->
-      <div class="flex-1">
-        <%= link_to task.name, task_path(task), class: "text-xl font-medium text-purple-600 hover:text-purple-700 dark:text-purple-400 dark:hover:text-purple-300 transition-colors duration-200" %>
+      <div class="flex-1 min-w-0">
+        <%= link_to task.name, task_path(task), class: "text-lg font-medium text-purple-600 hover:text-purple-700 dark:text-purple-400 dark:hover:text-purple-300 transition-colors duration-200 block" %>
         
         <!-- Task Badges -->
-        <div class="flex flex-wrap gap-2 mt-3">
+        <div class="flex flex-wrap gap-1 mt-1">
           <% if task.urgent %>
-            <span class="inline-flex items-center px-3 py-1 rounded-full text-xs font-medium bg-red-100 text-red-800 dark:bg-red-900 dark:text-red-200">
+            <span class="inline-flex items-center px-2 py-0.5 rounded text-xs font-medium bg-red-100 text-red-800 dark:bg-red-900 dark:text-red-200">
               🚨 Urgent
             </span>
           <% end %>
           
           <% if task.important %>
-            <span class="inline-flex items-center px-3 py-1 rounded-full text-xs font-medium bg-yellow-100 text-yellow-800 dark:bg-yellow-900 dark:text-yellow-200">
+            <span class="inline-flex items-center px-2 py-0.5 rounded text-xs font-medium bg-yellow-100 text-yellow-800 dark:bg-yellow-900 dark:text-yellow-200">
               ⭐ Important
             </span>
           <% end %>
@@ -34,42 +34,42 @@
             <% due_class = task.due_date < Date.current ? "bg-red-100 text-red-800 dark:bg-red-900 dark:text-red-200" : 
                           task.due_date == Date.current ? "bg-orange-100 text-orange-800 dark:bg-orange-900 dark:text-orange-200" : 
                           "bg-blue-100 text-blue-800 dark:bg-blue-900 dark:text-blue-200" %>
-            <span class="inline-flex items-center px-3 py-1 rounded-full text-xs font-medium <%= due_class %>">
-              📅 Due: <%= task.due_date.strftime("%m/%d/%Y") %>
+            <span class="inline-flex items-center px-2 py-0.5 rounded text-xs font-medium <%= due_class %>">
+              📅 <%= task.due_date.strftime("%m/%d") %>
             </span>
           <% end %>
           
-          <span class="inline-flex items-center px-3 py-1 rounded-full text-xs font-medium bg-purple-100 text-purple-800 dark:bg-purple-900 dark:text-purple-200">
+          <span class="inline-flex items-center px-2 py-0.5 rounded text-xs font-medium bg-purple-100 text-purple-800 dark:bg-purple-900 dark:text-purple-200">
             📋 <%= task.task_list.name %>
           </span>
           
           <% if task.estimate %>
-            <span class="inline-flex items-center px-3 py-1 rounded-full text-xs font-medium bg-gray-100 text-gray-800 dark:bg-gray-700 dark:text-gray-200">
-              ⏱️ <%= task.estimate %>min
+            <span class="inline-flex items-center px-2 py-0.5 rounded text-xs font-medium bg-gray-100 text-gray-800 dark:bg-gray-700 dark:text-gray-200">
+              ⏱️ <%= task.estimate %>m
             </span>
           <% end %>
         </div>
         
         <!-- Task Description -->
         <% if task.description.present? %>
-          <p class="text-gray-600 dark:text-gray-400 text-sm mt-3 leading-relaxed"><%= truncate(task.description, length: 150) %></p>
+          <p class="text-gray-600 dark:text-gray-400 text-xs mt-1 leading-relaxed"><%= truncate(task.description, length: 100) %></p>
         <% end %>
       </div>
     </div>
     
     <!-- Action Buttons -->
-    <div class="flex space-x-3 ml-4">
+    <div class="flex space-x-2 ml-2 flex-shrink-0">
       <%= link_to "Edit", edit_task_path(task), 
-          class: "text-purple-600 hover:text-purple-700 dark:text-purple-400 dark:hover:text-purple-300 font-medium py-2 px-4 rounded-lg hover:bg-purple-50 dark:hover:bg-purple-950 transition-colors duration-200" %>
+          class: "text-purple-600 hover:text-purple-700 dark:text-purple-400 dark:hover:text-purple-300 font-medium py-1 px-2 rounded text-xs hover:bg-purple-50 dark:hover:bg-purple-950 transition-colors duration-200" %>
       <%= link_to "Delete", task_path(task), method: :delete, 
           confirm: "Are you sure?", 
-          class: "text-red-600 hover:text-red-700 dark:text-red-400 dark:hover:text-red-300 font-medium py-2 px-4 rounded-lg hover:bg-red-50 dark:hover:bg-red-950 transition-colors duration-200" %>
+          class: "text-red-600 hover:text-red-700 dark:text-red-400 dark:hover:text-red-300 font-medium py-1 px-2 rounded text-xs hover:bg-red-50 dark:hover:bg-red-950 transition-colors duration-200" %>
     </div>
   </div>
   
   <!-- Children Tasks (initially hidden) -->
   <% if task.children.any? %>
-    <div data-task-toggle-target="children" style="display: none;" class="mt-6 space-y-4">
+    <div data-task-toggle-target="children" style="display: none;" class="ml-6 mt-2 space-y-2">
       <% task.children.each do |child_task| %>
         <%= render 'task_item', task: child_task %>
       <% end %>
