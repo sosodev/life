@@ -10,7 +10,7 @@ class TasksController < ApplicationController
   def new
     @task = Task.new
     @task_lists = TaskList.all
-    @parent_tasks = Task.where(parent_id: nil)
+    @parent_tasks = []
   end
 
   def create
@@ -20,8 +20,19 @@ class TasksController < ApplicationController
       redirect_to tasks_path, notice: "Task was successfully created."
     else
       @task_lists = TaskList.all
-      @parent_tasks = Task.where(parent_id: nil)
+      @parent_tasks = @task.task_list_id ? Task.where(task_list_id: @task.task_list_id) : []
       render :new, status: :unprocessable_entity
+    end
+  end
+
+  def parent_tasks
+    task_list_id = params[:task_list_id]
+    
+    if task_list_id.present?
+      tasks = Task.where(task_list_id: task_list_id).select(:id, :name)
+      render json: tasks
+    else
+      render json: []
     end
   end
 
