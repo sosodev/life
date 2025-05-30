@@ -1,10 +1,10 @@
-<div class="border border-gray-200 rounded-lg p-4 bg-white">
+<div class="border border-gray-200 rounded-lg p-4 bg-white" data-controller="task-toggle">
   <div class="flex items-center justify-between">
     <div class="flex items-center space-x-3">
       <!-- Expand/Collapse Button for tasks with children -->
       <% if task.children.any? %>
-        <button id="toggle-<%= task.id %>" 
-                onclick="toggleChildren(<%= task.id %>)"
+        <button data-task-toggle-target="button"
+                data-action="click->task-toggle#toggle"
                 class="text-gray-500 hover:text-gray-700 font-mono text-sm">
           ▶
         </button>
@@ -62,7 +62,7 @@
   
   <!-- Children Tasks (initially hidden) -->
   <% if task.children.any? %>
-    <div id="children-<%= task.id %>" style="display: none;" class="ml-8 mt-4 space-y-2">
+    <div data-task-toggle-target="children" style="display: none;" class="ml-8 mt-4 space-y-2">
       <% task.children.each do |child_task| %>
         <%= render 'task_item', task: child_task %>
       <% end %>

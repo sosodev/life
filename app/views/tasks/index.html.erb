@@ -71,18 +71,3 @@
     <% end %>
   </div>
 </div>
-
-<script>
-  function toggleChildren(taskId) {
-    const childrenDiv = document.getElementById('children-' + taskId);
-    const toggleButton = document.getElementById('toggle-' + taskId);
-    
-    if (childrenDiv.style.display === 'none' || childrenDiv.style.display === '') {
-      childrenDiv.style.display = 'block';
-      toggleButton.textContent = '▼';
-    } else {
-      childrenDiv.style.display = 'none';
-      toggleButton.textContent = '▶';
-    }
-  }
-</script>
