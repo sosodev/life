@@ -15,56 +15,58 @@
     <% if @task_lists.any? %>
       <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
         <% @task_lists.each do |task_list| %>
-          <div class="bg-white dark:bg-gray-800 rounded-lg shadow-md hover:shadow-lg transition-shadow duration-200 p-6 border border-gray-200 dark:border-gray-700">
-            <div class="flex items-center justify-between mb-4">
-              <h3 class="text-xl font-semibold text-gray-900 dark:text-gray-100"><%= task_list.name %></h3>
-              <div class="flex space-x-2">
-                <%= link_to "Edit", edit_task_list_path(task_list),
-                            class: "text-purple-600 hover:text-purple-700 dark:text-purple-400 dark:hover:text-purple-300 font-medium py-1 px-3 rounded-lg hover:bg-purple-50 dark:hover:bg-purple-950 transition-colors duration-200" %>
-                <%= link_to "Delete", task_list_path(task_list), method: :delete,
-                            confirm: "Are you sure? This will also delete all tasks in this list.",
-                            class: "text-red-600 hover:text-red-700 dark:text-red-400 dark:hover:text-red-300 font-medium py-1 px-3 rounded-lg hover:bg-red-50 dark:hover:bg-red-950 transition-colors duration-200" %>
+          <div class="flex flex-col justify-between bg-white dark:bg-gray-800 rounded-lg shadow-md hover:shadow-lg transition-shadow duration-200 p-6 border border-gray-200 dark:border-gray-700">
+            <div class="mb-6">
+              <div class="flex items-center justify-between mb-4">
+                <h3 class="text-xl font-semibold text-gray-900 dark:text-gray-100"><%= task_list.name %></h3>
+                <div class="flex space-x-2">
+                  <%= link_to "Edit", edit_task_list_path(task_list),
+                              class: "text-purple-600 hover:text-purple-700 dark:text-purple-400 dark:hover:text-purple-300 font-medium py-1 px-3 rounded-lg hover:bg-purple-50 dark:hover:bg-purple-950 transition-colors duration-200" %>
+                  <%= link_to "Delete", task_list_path(task_list), method: :delete,
+                              confirm: "Are you sure? This will also delete all tasks in this list.",
+                              class: "text-red-600 hover:text-red-700 dark:text-red-400 dark:hover:text-red-300 font-medium py-1 px-3 rounded-lg hover:bg-red-50 dark:hover:bg-red-950 transition-colors duration-200" %>
+                </div>
+              </div>
+
+              <div class="space-y-3">
+                <div class="flex items-center justify-between">
+                  <span class="text-sm text-gray-600 dark:text-gray-400">Total Tasks</span>
+                  <span class="inline-flex items-center px-3 py-1 rounded-full text-sm font-medium bg-purple-100 text-purple-800 dark:bg-purple-900 dark:text-purple-200">
+                    <%= task_list.tasks.count %>
+                  </span>
+                </div>
+
+                <% if task_list.tasks.where(urgent: true).any? %>
+                  <div class="flex items-center justify-between">
+                    <span class="text-sm text-gray-600 dark:text-gray-400">Urgent Tasks</span>
+                    <span class="inline-flex items-center px-3 py-1 rounded-full text-sm font-medium bg-red-100 text-red-800 dark:bg-red-900 dark:text-red-200">
+                      <%= task_list.tasks.where(urgent: true).count %>
+                    </span>
+                  </div>
+                <% end %>
+
+                <% if task_list.tasks.where(important: true).any? %>
+                  <div class="flex items-center justify-between">
+                    <span class="text-sm text-gray-600 dark:text-gray-400">Important Tasks</span>
+                    <span class="inline-flex items-center px-3 py-1 rounded-full text-sm font-medium bg-yellow-100 text-yellow-800 dark:bg-yellow-900 dark:text-yellow-200">
+                      <%= task_list.tasks.where(important: true).count %>
+                    </span>
+                  </div>
+                <% end %>
+
+                <% overdue_tasks = task_list.tasks.where('due_date < ?', Date.current) %>
+                <% if overdue_tasks.any? %>
+                  <div class="flex items-center justify-between">
+                    <span class="text-sm text-gray-600 dark:text-gray-400">Overdue Tasks</span>
+                    <span class="inline-flex items-center px-3 py-1 rounded-full text-sm font-medium bg-red-100 text-red-800 dark:bg-red-900 dark:text-red-200">
+                      <%= overdue_tasks.count %>
+                    </span>
+                  </div>
+                <% end %>
               </div>
             </div>
 
-            <div class="space-y-3">
-              <div class="flex items-center justify-between">
-                <span class="text-sm text-gray-600 dark:text-gray-400">Total Tasks</span>
-                <span class="inline-flex items-center px-3 py-1 rounded-full text-sm font-medium bg-purple-100 text-purple-800 dark:bg-purple-900 dark:text-purple-200">
-                  <%= task_list.tasks.count %>
-                </span>
-              </div>
-
-              <% if task_list.tasks.where(urgent: true).any? %>
-                <div class="flex items-center justify-between">
-                  <span class="text-sm text-gray-600 dark:text-gray-400">Urgent Tasks</span>
-                  <span class="inline-flex items-center px-3 py-1 rounded-full text-sm font-medium bg-red-100 text-red-800 dark:bg-red-900 dark:text-red-200">
-                    <%= task_list.tasks.where(urgent: true).count %>
-                  </span>
-                </div>
-              <% end %>
-
-              <% if task_list.tasks.where(important: true).any? %>
-                <div class="flex items-center justify-between">
-                  <span class="text-sm text-gray-600 dark:text-gray-400">Important Tasks</span>
-                  <span class="inline-flex items-center px-3 py-1 rounded-full text-sm font-medium bg-yellow-100 text-yellow-800 dark:bg-yellow-900 dark:text-yellow-200">
-                    <%= task_list.tasks.where(important: true).count %>
-                  </span>
-                </div>
-              <% end %>
-
-              <% overdue_tasks = task_list.tasks.where('due_date < ?', Date.current) %>
-              <% if overdue_tasks.any? %>
-                <div class="flex items-center justify-between">
-                  <span class="text-sm text-gray-600 dark:text-gray-400">Overdue Tasks</span>
-                  <span class="inline-flex items-center px-3 py-1 rounded-full text-sm font-medium bg-red-100 text-red-800 dark:bg-red-900 dark:text-red-200">
-                    <%= overdue_tasks.count %>
-                  </span>
-                </div>
-              <% end %>
-            </div>
-
-            <div class="mt-6 pt-4 border-t border-gray-200 dark:border-gray-700">
+            <div class="pt-4 border-t border-gray-200 dark:border-gray-700">
               <%= link_to "View Tasks", tasks_path(task_list_id: task_list.id),
                           class: "w-full bg-gray-100 hover:bg-gray-200 dark:bg-gray-700 dark:hover:bg-gray-600 text-gray-900 dark:text-gray-100 font-medium py-2 px-4 rounded-lg transition-colors duration-200 text-center block" %>
             </div>
