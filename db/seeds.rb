@@ -7,3 +7,12 @@
 #   ["Action", "Comedy", "Drama", "Horror"].each do |genre_name|
 #     MovieGenre.find_or_create_by!(name: genre_name)
 #   end
+
+if Rails.env.development?
+  task_list = TaskList.create!(name: "test")
+
+  (1..100).each do |i|
+    parent_task = Task.create!(name: "Test-#{i}", task_list: task_list)
+    Task.create!(name: "Child-Test-#{i}", parent: parent_task, task_list: task_list)
+  end
+end

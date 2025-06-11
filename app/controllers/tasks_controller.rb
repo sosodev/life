@@ -49,7 +49,7 @@ class TasksController < ApplicationController
 
   def parent_tasks
     task_list_id = params[:task_list_id]
-    
+
     if task_list_id.present?
       tasks = Task.where(task_list_id: task_list_id).select(:id, :name)
       render json: tasks
@@ -69,7 +69,7 @@ class TasksController < ApplicationController
   end
 
   def filter_tasks
-    tasks = Task.includes(:task_list, :parent)
+    tasks = Task.includes(:task_list, :parent, children: [:task_list, :parent, :children])
 
     # Filter by task list if specified
     if params[:task_list_id].present?
