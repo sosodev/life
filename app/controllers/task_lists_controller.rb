@@ -9,9 +9,9 @@ class TaskListsController < ApplicationController
 
   def create
     @task_list = TaskList.new(task_list_params)
-    
+
     if @task_list.save
-      redirect_to task_lists_path, notice: 'Task list was successfully created.'
+      redirect_to task_lists_path, notice: "Task list was successfully created."
     else
       render :new, status: :unprocessable_entity
     end
@@ -23,9 +23,9 @@ class TaskListsController < ApplicationController
 
   def update
     @task_list = TaskList.find(params[:id])
-    
+
     if @task_list.update(task_list_params)
-      redirect_to task_lists_path, notice: 'Task list was successfully updated.'
+      redirect_to task_lists_path, notice: "Task list was successfully updated."
     else
       render :edit, status: :unprocessable_entity
     end
@@ -34,7 +34,7 @@ class TaskListsController < ApplicationController
   def destroy
     @task_list = TaskList.find(params[:id])
     @task_list.destroy
-    redirect_to task_lists_path, notice: 'Task list was successfully deleted.'
+    redirect_to task_lists_path, notice: "Task list was successfully deleted."
   end
 
   private

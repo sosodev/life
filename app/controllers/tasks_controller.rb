@@ -1,5 +1,5 @@
 class TasksController < ApplicationController
-  before_action :set_task, only: [:show, :edit, :update, :destroy]
+  before_action :set_task, only: [ :show, :edit, :update, :destroy ]
 
   def index
     @task_lists = TaskList.all
@@ -69,7 +69,7 @@ class TasksController < ApplicationController
   end
 
   def filter_tasks
-    tasks = Task.includes(:task_list, :parent, children: [:task_list, :parent, :children])
+    tasks = Task.includes(:task_list, :parent, children: [ :task_list, :parent, :children ])
 
     # Filter by task list if specified
     if params[:task_list_id].present?

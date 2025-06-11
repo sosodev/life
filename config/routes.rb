@@ -18,5 +18,5 @@ Rails.application.routes.draw do
     end
   end
   resources :task_lists
-  resources :calendar, only: [:index]
+  resources :calendar, only: [ :index ]
 end
