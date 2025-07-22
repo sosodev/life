@@ -12,7 +12,7 @@ SERVER_PID=""
 # Function to start the server
 start_server() {
     echo "Starting Rails server in production mode..."
-    bundle exec rails server -e production &
+    bundle exec rails server -e production & # set the port to 8080 AI!
     SERVER_PID=$!
     echo "Server started with PID: $SERVER_PID"
 }
