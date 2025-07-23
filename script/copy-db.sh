@@ -5,10 +5,11 @@ set -e
 # Usage: $0 <to|from>
 
 if [ "$1" = "from" ]; then
-  sftp kyle@life.local:/home/kyle/life/storage/production.sqlite3 .
+  mkdir -p backup
+  sftp kyle@life.local:/home/kyle/life/storage/production.sqlite3 backup/
 elif [ "$1" = "to" ]; then
   sftp kyle@life.local <<EOF
-put production.sqlite3 /home/kyle/life/storage/production.sqlite3
+put backup/production.sqlite3 /home/kyle/life/storage/production.sqlite3
 EOF
 else
   echo "Usage: $0 <to|from>"
