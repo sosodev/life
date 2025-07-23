@@ -5,7 +5,6 @@ set -e
 # Usage: $0 <to|from>
 
 if [ "$1" = "from" ]; then
-  mkdir -p backup
   sftp kyle@life.local:/home/kyle/life/storage/production.sqlite3 backup/
 elif [ "$1" = "to" ]; then
   sftp kyle@life.local <<EOF
