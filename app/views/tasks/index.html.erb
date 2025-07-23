@@ -50,7 +50,7 @@
               <!-- Urgent Filter -->
               <div>
                 <label class="flex items-center">
-                  <%= form.check_box :urgent, { checked: params[:urgent] == 'true', class: "h-4 w-4 text-purple-600 focus:ring-purple-500 border-gray-300 dark:border-gray-600 rounded", data: { action: "change->filter-form#change" } }, "true", "" %>
+                  <%= form.check_box :urgent, { checked: params[:urgent] == 'true', class: "h-4 w-4 text-purple-600 focus:ring-purple-500 border-gray-300 dark:border-gray-600 rounded", data: { action: "change->filter-form#change" } }, "true", nil %>
                   <span class="ml-2 text-sm text-gray-700 dark:text-gray-300">Urgent only</span>
                 </label>
               </div>
@@ -58,7 +58,7 @@
               <!-- Important Filter -->
               <div>
                 <label class="flex items-center">
-                  <%= form.check_box :important, { checked: params[:important] == 'true', class: "h-4 w-4 text-purple-600 focus:ring-purple-500 border-gray-300 dark:border-gray-600 rounded", data: { action: "change->filter-form#change" } }, "true", "" %>
+                  <%= form.check_box :important, { checked: params[:important] == 'true', class: "h-4 w-4 text-purple-600 focus:ring-purple-500 border-gray-300 dark:border-gray-600 rounded", data: { action: "change->filter-form#change" } }, "true", nil %>
                   <span class="ml-2 text-sm text-gray-700 dark:text-gray-300">Important only</span>
                 </label>
               </div>
