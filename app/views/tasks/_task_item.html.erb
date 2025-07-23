@@ -13,7 +13,7 @@
     
     <!-- Task Name -->
     <div class="flex-1 min-w-0 px-3">
-      <%= link_to task.name, task_path(task), class: "text-base font-medium text-purple-600 hover:text-purple-700 dark:text-purple-400 dark:hover:text-purple-300 transition-colors duration-200 truncate block" %>
+      <%= link_to task.name, task_path(task), class: "text-base font-medium transition-colors duration-200 truncate block #{task.finished_at? ? 'text-gray-500 dark:text-gray-400 line-through' : 'text-purple-600 hover:text-purple-700 dark:text-purple-400 dark:hover:text-purple-300'}" %>
       <% if task.description.present? %>
         <p class="text-xs text-gray-500 dark:text-gray-400 mt-1 truncate"><%= truncate(task.description, length: 80) %></p>
       <% end %>

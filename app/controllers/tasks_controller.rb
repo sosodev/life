@@ -98,6 +98,14 @@ class TasksController < ApplicationController
       tasks = tasks.where(due_date: nil)
     end
 
+    # Filter by completion status
+    case params[:completed]
+    when "completed"
+      tasks = tasks.where.not(finished_at: nil)
+    when "not_completed"
+      tasks = tasks.where(finished_at: nil)
+    end
+
     # Only show top-level tasks (children will be shown via expansion)
     tasks.where(parent_id: nil).order(:created_at)
   end
