@@ -33,6 +33,11 @@ class TasksController < ApplicationController
   end
 
   def update
+    if params[:complete] == 'true'
+      @task.update(finished_at: Time.current)
+      return redirect_to tasks_path, notice: "Task completed."
+    end
+
     if @task.update(task_params)
       redirect_to tasks_path, notice: "Task was successfully updated."
     else
