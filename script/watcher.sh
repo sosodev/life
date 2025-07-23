@@ -22,11 +22,10 @@ stop_server() {
     if [ -n "$SERVER_PID" ]; then
         echo "Stopping server with PID: $SERVER_PID..."
 
-        # When the rails server is killed the script exits AI!
         # Kill the process and any of its children
         kill -TERM $SERVER_PID
-        # Wait for the process to terminate
-        wait $SERVER_PID 2>/dev/null
+        # Wait for the process to terminate. `|| true` prevents script exit due to `set -e`.
+        wait $SERVER_PID 2>/dev/null || true
         echo "Server stopped."
     fi
     SERVER_PID=""
