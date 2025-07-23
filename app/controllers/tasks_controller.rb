@@ -35,7 +35,11 @@ class TasksController < ApplicationController
   def update
     if params[:complete] == 'true'
       @task.update(finished_at: Time.current)
-      return redirect_to tasks_path, notice: "Task completed."
+      respond_to do |format|
+        format.turbo_stream { render turbo_stream: turbo_stream.replace(@task, partial: "tasks/task_item", locals: { task: @task, show_confetti: true }) }
+        format.html { redirect_to tasks_path, notice: "Task completed." }
+      end
+      return
     end
 
     if @task.update(task_params)
