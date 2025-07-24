@@ -14,7 +14,7 @@ export default class extends Controller {
       confetti.style.top = `${-20 - (Math.random() * 100)}px`
       confetti.style.fontSize = `${Math.random() * 1 + 0.5}rem`
       confetti.style.transform = `rotate(${Math.random() * 360}deg)`
-      confetti.style.transition = 'top 1.5s ease-in, opacity 1.5s ease-in'
+      confetti.style.transition = 'top 1.5s ease-in, opacity 1.5s ease-in, transform 1.5s ease-out'
       confetti.style.userSelect = 'none'
       confetti.style.pointerEvents = 'none'
       confetti.style.zIndex = '100'
@@ -22,6 +22,9 @@ export default class extends Controller {
 
       requestAnimationFrame(() => {
         setTimeout(() => {
+          const horizontalDrift = (Math.random() - 0.5) * 200 // -100px to 100px
+          const currentTransform = confetti.style.transform
+          confetti.style.transform = `${currentTransform} translateX(${horizontalDrift}px)`
           confetti.style.top = `${window.innerHeight + 20}px`
           confetti.style.opacity = '0'
         }, 10)
