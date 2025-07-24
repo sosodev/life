@@ -2,8 +2,7 @@
 <% show_confetti ||= false %>
 <div id="<%= dom_id(task) %>"
      class="border-b border-gray-200 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-800 transition-colors duration-200"
-     data-controller="task-toggle<%= ' confetti' if show_confetti %>"
-     data-action="<%= 'turbo:load->confetti#rain' if show_confetti %>">
+     data-controller="task-toggle<%= ' confetti' if show_confetti %>">
   <div class="flex items-center py-3 px-4">
     <!-- Expand/Collapse Button -->
     <div class="flex-shrink-0 w-8 flex justify-center">

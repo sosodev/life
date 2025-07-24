@@ -1,8 +1,8 @@
 import { Controller } from "@hotwired/stimulus"
 
-// Creates a confetti animation within the controller's element when the `rain` action is called.
+// Creates a confetti animation within the controller's element when it connects to the DOM.
 export default class extends Controller {
-  rain() {
+  connect() {
     const container = this.element
     if (getComputedStyle(container).position === 'static') {
       container.style.position = 'relative'
