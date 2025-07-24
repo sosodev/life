@@ -1,21 +1,15 @@
 import { Controller } from "@hotwired/stimulus"
 
-// Creates a confetti animation within the controller's element when it connects to the DOM.
+// Creates a full-screen confetti animation when it connects to the DOM.
 export default class extends Controller {
   connect() {
-    const container = this.element
-    if (getComputedStyle(container).position === 'static') {
-      container.style.position = 'relative'
-    }
-    container.style.overflow = 'hidden'
-
     const confettiCount = 50
     const emojis = ['🎉', '🎊', '🎈', '✨', '⭐', '💖', '🚀']
 
     for (let i = 0; i < confettiCount; i++) {
       const confetti = document.createElement('div')
       confetti.innerText = emojis[Math.floor(Math.random() * emojis.length)]
-      confetti.style.position = 'absolute'
+      confetti.style.position = 'fixed'
       confetti.style.left = `${Math.random() * 100}%`
       confetti.style.top = `${-20 - (Math.random() * 100)}px`
       confetti.style.fontSize = `${Math.random() * 1 + 0.5}rem`
@@ -24,11 +18,11 @@ export default class extends Controller {
       confetti.style.userSelect = 'none'
       confetti.style.pointerEvents = 'none'
       confetti.style.zIndex = '100'
-      container.appendChild(confetti)
+      document.body.appendChild(confetti)
 
       requestAnimationFrame(() => {
         setTimeout(() => {
-          confetti.style.top = `${container.offsetHeight + 20}px`
+          confetti.style.top = `${window.innerHeight + 20}px`
           confetti.style.opacity = '0'
         }, 10)
       })
