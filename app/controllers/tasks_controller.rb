@@ -33,11 +33,13 @@ class TasksController < ApplicationController
   end
 
   def update
-    if params[:complete] == 'true'
-      @task.update(finished_at: Time.current)
+    if params.key?(:complete)
+      completed = params[:complete] == 'true'
+      @task.update(finished_at: completed ? Time.current : nil)
+
       respond_to do |format|
-        format.turbo_stream { render turbo_stream: turbo_stream.replace(@task, partial: "tasks/task_item", locals: { task: @task, show_confetti: true }) }
-        format.html { redirect_to tasks_path, notice: "Task completed." }
+        format.turbo_stream { render turbo_stream: turbo_stream.replace(@task, partial: "tasks/task_item", locals: { task: @task, show_confetti: completed }) }
+        format.html { redirect_to tasks_path, notice: completed ? "Task completed." : "Task marked as not completed." }
       end
       return
     end

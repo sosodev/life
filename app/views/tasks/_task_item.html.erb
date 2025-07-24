@@ -68,6 +68,13 @@
             data: { turbo_confirm: "Complete this task?" },
             class: "text-green-600 hover:text-green-700 dark:text-green-400 dark:hover:text-green-300 font-medium py-1 px-2 rounded text-xs hover:bg-green-50 dark:hover:bg-green-950 transition-colors duration-200",
             form_class: "inline-flex" %>
+      <% else %>
+        <%= button_to "↩", task_path(task),
+            method: :patch,
+            params: { complete: 'false' },
+            data: { turbo_confirm: "Mark this task as not completed?" },
+            class: "text-blue-600 hover:text-blue-700 dark:text-blue-400 dark:hover:text-blue-300 font-medium py-1 px-2 rounded text-xs hover:bg-blue-50 dark:hover:bg-blue-950 transition-colors duration-200",
+            form_class: "inline-flex" %>
       <% end %>
       <%= link_to "Edit", edit_task_path(task), 
           class: "text-purple-600 hover:text-purple-700 dark:text-purple-400 dark:hover:text-purple-300 font-medium py-1 px-2 rounded text-xs hover:bg-purple-50 dark:hover:bg-purple-950 transition-colors duration-200" %>
