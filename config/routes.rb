@@ -1,4 +1,17 @@
 Rails.application.routes.draw do
+  get "entries/show"
+  get "entries/new"
+  get "entries/create"
+  get "entries/edit"
+  get "entries/update"
+  get "entries/destroy"
+  get "journals/index"
+  get "journals/show"
+  get "journals/new"
+  get "journals/create"
+  get "journals/edit"
+  get "journals/update"
+  get "journals/destroy"
   # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html
 
   # Reveal health status on /up that returns 200 if the app boots with no exceptions, otherwise 500.

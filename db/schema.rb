@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.0].define(version: 2025_07_25_062841) do
+ActiveRecord::Schema[8.0].define(version: 2025_07_25_070815) do
   create_table "action_text_rich_texts", force: :cascade do |t|
     t.string "name", null: false
     t.text "body"
@@ -49,6 +49,19 @@ ActiveRecord::Schema[8.0].define(version: 2025_07_25_062841) do
     t.index ["blob_id", "variation_digest"], name: "index_active_storage_variant_records_uniqueness", unique: true
   end
 
+  create_table "entries", force: :cascade do |t|
+    t.integer "journal_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["journal_id"], name: "index_entries_on_journal_id"
+  end
+
+  create_table "journals", force: :cascade do |t|
+    t.string "title"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
   create_table "task_lists", force: :cascade do |t|
     t.string "name", null: false
     t.datetime "created_at", null: false
@@ -77,6 +90,7 @@ ActiveRecord::Schema[8.0].define(version: 2025_07_25_062841) do
 
   add_foreign_key "active_storage_attachments", "active_storage_blobs", column: "blob_id"
   add_foreign_key "active_storage_variant_records", "active_storage_blobs", column: "blob_id"
+  add_foreign_key "entries", "journals"
   add_foreign_key "tasks", "task_lists"
   add_foreign_key "tasks", "tasks", column: "parent_id"
 end
