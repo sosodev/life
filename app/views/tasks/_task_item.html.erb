@@ -9,7 +9,7 @@
       <% if task.children.any? %>
         <button data-task-toggle-target="button"
                 data-action="click->task-toggle#toggle"
-                class="text-gray-500 hover:text-purple-600 dark:text-gray-400 dark:hover:text-purple-400 font-mono text-sm transition-colors duration-200 p-1 rounded hover:bg-purple-50 dark:hover:bg-purple-950">
+                class="text-gray-500 hover:text-purple-600 dark:text-gray-400 dark:hover:text-purple-400 font-mono text-sm transition-colors duration-200 p-1 rounded hover:bg-purple-50 dark:hover:bg-purple-950 cursor-pointer">
           ▶
         </button>
       <% end %>
@@ -66,20 +66,20 @@
             method: :patch,
             params: { complete: 'true' },
             data: { turbo_confirm: "Complete this task?" },
-            class: "text-green-600 hover:text-green-700 dark:text-green-400 dark:hover:text-green-300 font-medium py-1 px-2 rounded text-xs hover:bg-green-50 dark:hover:bg-green-950 transition-colors duration-200",
+            class: "text-green-600 hover:text-green-700 dark:text-green-400 dark:hover:text-green-300 font-medium py-1 px-2 rounded text-xs hover:bg-green-50 dark:hover:bg-green-950 transition-colors duration-200 cursor-pointer",
             form_class: "inline-flex" %>
       <% else %>
         <%= button_to "↩", task_path(task),
             method: :patch,
             params: { complete: 'false' },
             data: { turbo_confirm: "Mark this task as not completed?" },
-            class: "text-blue-600 hover:text-blue-700 dark:text-blue-400 dark:hover:text-blue-300 font-medium py-1 px-2 rounded text-xs hover:bg-blue-50 dark:hover:bg-blue-950 transition-colors duration-200",
+            class: "text-blue-600 hover:text-blue-700 dark:text-blue-400 dark:hover:text-blue-300 font-medium py-1 px-2 rounded text-xs hover:bg-blue-50 dark:hover:bg-blue-950 transition-colors duration-200 cursor-pointer",
             form_class: "inline-flex" %>
       <% end %>
-      <%= link_to "Edit", edit_task_path(task), 
-          class: "text-purple-600 hover:text-purple-700 dark:text-purple-400 dark:hover:text-purple-300 font-medium py-1 px-2 rounded text-xs hover:bg-purple-50 dark:hover:bg-purple-950 transition-colors duration-200" %>
+      <%= link_to "✎", edit_task_path(task), 
+          class: "text-purple-600 hover:text-purple-700 dark:text-purple-400 dark:hover:text-purple-300 font-medium py-1 px-2 rounded text-xs hover:bg-purple-50 dark:hover:bg-purple-950 transition-colors duration-200 cursor-pointer" %>
       <%= link_to "×", task_path(task), data: { turbo_method: :delete, turbo_confirm: "Are you sure?" },
-          class: "text-red-600 hover:text-red-700 dark:text-red-400 dark:hover:text-red-300 font-medium py-1 px-2 rounded text-xs hover:bg-red-50 dark:hover:bg-red-950 transition-colors duration-200" %>
+          class: "text-red-600 hover:text-red-700 dark:text-red-400 dark:hover:text-red-300 font-medium py-1 px-2 rounded text-xs hover:bg-red-50 dark:hover:bg-red-950 transition-colors duration-200 cursor-pointer" %>
     </div>
   </div>
   
