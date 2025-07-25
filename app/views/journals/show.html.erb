@@ -25,7 +25,7 @@
                   <%= entry.created_at.strftime("%B %d, %Y at %I:%M %p") %>
                 </p>
               </div>
-              <div class="prose dark:prose-invert max-w-none">
+              <div class="prose dark:prose-invert max-w-none text-gray-900 dark:text-gray-300">
                 <%= truncate(strip_tags(entry.content.to_s), length: 200) %>
               </div>
             </div>
