@@ -14,7 +14,12 @@ start_server() {
     echo "Starting Rails server in production mode..."
     bundle exec rails server -e production -p 8080 &
     SERVER_PID=$!
-    echo "Server started with PID: $SERVER_PID"
+    if kill -0 $SERVER_PID > /dev/null 2>&1; then
+        echo "Server started with PID: $SERVER_PID"
+    else
+        echo "Failed to start server."
+        exit 1
+    fi
 }
 
 # Function to stop the server
@@ -27,8 +32,9 @@ stop_server() {
         # Wait for the process to terminate. `|| true` prevents script exit due to `set -e`.
         wait $SERVER_PID 2>/dev/null || true
         echo "Server stopped."
+    else
+        echo "No server running."
     fi
-    SERVER_PID=""
 }
 
 # Function to deploy updates
@@ -37,16 +43,32 @@ deploy() {
     stop_server
 
     echo "Pulling latest changes..."
-    git pull
+    if ! git pull; then
+        echo "Git pull failed. Restarting server with previous version."
+        start_server
+        continue
+    fi
 
     echo "Installing dependencies..."
-    bundle install --without development test
+    if ! bundle install --without development test; then
+        echo "Bundle install failed. Restarting server with previous version."
+        start_server
+        continue
+    fi
 
     echo "Running database migrations..."
-    RAILS_ENV=production bundle exec rails db:migrate
+    if ! RAILS_ENV=production bundle exec rails db:migrate; then
+        echo "Database migration failed. Restarting server with previous version."
+        start_server
+        continue
+    fi
 
     echo "Precompiling assets..."
-    RAILS_ENV=production bundle exec rails assets:precompile
+    if ! RAILS_ENV=production bundle exec rails assets:precompile; then
+        echo "Asset precompilation failed. Restarting server with previous version."
+        start_server
+        continue
+    fi
 
     start_server
 }
